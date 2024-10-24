@@ -1,0 +1,24 @@
+{
+  "name": "controleestoqueback",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/FelpsSenai/ControleEstoqueBack.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/FelpsSenai/ControleEstoqueBack/issues"
+  },
+  "homepage": "https://github.com/FelpsSenai/ControleEstoqueBack#readme",
+  "dependencies": {
+    "express": "^4.21.1",
+    "mysql2": "^3.11.3"
+  }
+}
