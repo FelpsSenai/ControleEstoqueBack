@@ -2,7 +2,7 @@ const express = require('express');
 const cors = require('cors');
 const server = express();
 const migration = require('../db/migration/V1__CREATE_TABLES');
-const conexao = require('../db/conexao/conexao.js'); // Importando a conexão
+const conexao = require('../db/conexao/conexao.js');
 
 server.use(express.json());
 server.use(cors());
@@ -13,20 +13,17 @@ conexao.connect((erro) => {
         return;
     }
 
-    // Seleciona o banco de dados e executa as migrações
     conexao.query("USE ATIVIDADE_CONTROLE_ESTOQUE", (erro) => {
         if (erro) {
             console.log("Erro ao usar o banco de dados:", erro);
             return;
         }
 
-        // Executa as migrações
         migration((erro) => {
             if (erro) {
                 console.log("Erro ao executar migrações:", erro);
                 return;
             }
-            console.log("Migrações executadas com sucesso.");
         });
     });
 });
