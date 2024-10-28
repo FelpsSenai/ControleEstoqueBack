@@ -68,3 +68,46 @@ server.get("/mercados/:id_mercado/produtos/:id_produto", (req, res) => {
         }
     });
 });
+
+server.put("/mercados/:id_mercado/produtos/:id_produto", (req, res) => {
+    const idProduto = req.params.id_produto;
+
+    const jsonProduto = req.body;
+
+    const produto = {
+        nome: jsonProduto.nome,
+        descricao: jsonProduto.descricao,
+        preco: jsonProduto.preco,
+        quantidade: jsonProduto.quantidade
+    }
+
+    const sqlUpdate = "UPDATE PRODUTO "
+                    + "SET NOME = '" + produto.nome + "', "
+                    + "DESCRICAO = '" + produto.descricao + "', "
+                    + "PRECO = " + produto.preco + ", "
+                    + "QUANTIDADE = " + produto.quantidade + " "
+                    + "WHERE ID = " + idProduto;
+
+    conexao.query(sqlUpdate, (erro, resultado) => {
+        if (erro) {
+            res.status(400).json({ mensagem: erro });
+        } else {
+            res.json({ produto });
+        }
+    });
+});
+
+server.delete("/mercados/:id_mercado/produtos/:id_produto", (req, res) => {
+    const idProduto = req.params.id_produto;
+
+    const sqlDelete = "DELETE FROM PRODUTO "
+                    + "WHERE ID = " + idProduto;
+
+    conexao.query(sqlDelete, (erro, resultado) => {
+        if (erro) {
+            res.status(500).json({ mensagem: erro });
+        } else {
+            res.status(204).json({});
+        }
+    });
+});
