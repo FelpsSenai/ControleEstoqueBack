@@ -1,3 +1,6 @@
+
+const router = require ('./controller/routes.js');
+
 const express = require('express');
 const cors = require('cors');
 const server = express();
@@ -6,6 +9,7 @@ const conexao = require('../db/conexao/conexao.js');
 
 server.use(express.json());
 server.use(cors());
+server.use(router);
 
 conexao.connect((erro) => {
     if (erro) {
