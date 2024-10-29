@@ -43,7 +43,7 @@ function executeMigration(callback) {
                 if (erro) {
                     return callback(erro);
                 }
-                callback(null); // Migração concluída com sucesso
+                callback(null);
             });
         });
     });

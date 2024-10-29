@@ -1,8 +1,8 @@
 const server = require('../server.js');
 const conexao = require('../../db/conexao/conexao.js');
 
-server.get('/mercado', (req, res) => {
-    const consultaSql = 'SELECT ID, NOME, ENDERECO FROM loja';
+server.get('/mercados', (req, res) => {
+    const consultaSql = `SELECT ID, NOME FROM loja`;
     conexao.query(consultaSql, (erro, resultado) => {
         if(erro){
             console.log(erro);
@@ -12,47 +12,69 @@ server.get('/mercado', (req, res) => {
     })
 });
 
-server.post('/mercado', (req, res) => {
+server.get('/mercados/:id', (req, res) => {
+    const idMercado = req.params.id;
+    const consultaSql = `SELECT * FROM loja WHERE ID = ${idMercado}`;
+    conexao.query(consultaSql, (erro, resultado) => {
+        if(erro){
+            console.log(erro);
+            throw erro;
+        }
+        res.json(resultado)
+    })
+});
+
+server.post('/mercados', (req, res) => {
     const nomeMercado = req.body.nome;
     const enderecoMercado = req.body.endereco;
+    const mercado = {
+        nome: nomeMercado,
+        endereco: enderecoMercado
+    }
 
-    let insertSql = "INSERT INTO loja (NOME, ENDERECO) VALUES ('";
-    insertSql = insertSql.concat(nomeMercado, "', '");
-    insertSql = insertSql.concat(enderecoMercado, "')");
+    let insertSql = `INSERT INTO loja (NOME, ENDERECO) VALUES ('${nomeMercado}', '${enderecoMercado}')`;
 
     conexao.query(insertSql, (erro, resultado) => {
         if(erro) {
             console.log(erro);
             throw erro;
         }
-        res.json({mensagem: "Mercado cadastro com sucesso"});
+        res.json({mercado});
     });
 });
 
-server.put('/mercado/:idMercado', (req, res) => {
+server.put('/mercados/:idMercado', (req, res) => {
     const idMercado = req.params.idMercado;
     const nomeMercado = req.body.nome;
     const enderecoMercado = req.body.endereco;
 
-    let updateSql = "UPDATE loja SET nome = '";
-    updateSql = updateSql.concat(nomeMercado, "', ENDERECO = '");
-    updateSql = updateSql.concat(enderecoMercado, "' WHERE ID = '");
-    updateSql = updateSql.concat(idMercado, "'");
+    const mercado = {
+        nome: nomeMercado,
+        endereco: enderecoMercado
+    }
+
+    let updateSql = `UPDATE loja SET NOME = '${nomeMercado}', ENDERECO = '${enderecoMercado}' WHERE ID = '${idMercado}'`;
 
     conexao.query(updateSql, (erro, resultado) => {
         if(erro) {
             console.log(erro);
             throw erro;
         }
-        res.json({mensagem: "Mercado atualizado com sucesso"});
+        res.json({mercado});
     });
 });
 
-//A fazer o delete
-// server.delete('/mercado/:idMercado', (req, res) => {
-//     const idMercado = req.params.idMercado;
+server.delete('/mercados/:idMercado', (req, res) => {
+    const idMercado = req.params.idMercado;
 
-//     alunos.splice(indiceAluno, 1);
+    let deleteSql = `DELETE FROM loja WHERE ID = ${idMercado}`;
 
-//     res.json({mensagem: 'aluno removido com sucesso'});
-// });
+    conexao.query(deleteSql, (erro, resultado) => {
+        if(erro) {
+            res.status(500).json({mensagem: erro});
+        }
+        else{
+            res.status(204).json({});
+        }
+    });
+});

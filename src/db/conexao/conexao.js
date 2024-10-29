@@ -14,7 +14,6 @@ function criarBancoDeDados(callback) {
             console.log("Erro ao criar o banco de dados:", erro);
             return callback(erro);
         }
-        console.log("Banco de dados criado ou já existe.");
         callback(null);
     });
 }
@@ -31,7 +30,6 @@ conexao.connect((erro) => {
                 console.log("Erro ao usar o banco de dados:", erro);
                 return;
             }
-            console.log("Banco de dados selecionado.");
         });
     });
 });
