@@ -13,15 +13,15 @@ router.post("/mercados/:id_mercado/produtos/:id_produto/movimentacoes", (req, re
         data: jsonMovimentacao.data_movimentacao
     }
 
-    const sqlInsert = "INSERT INTO MOVIMENTACOES (TIPO, QUANTIDADE, DATA, PRODUTO_ID) "
+    const sqlInsert = "INSERT INTO MOVIMENTACAO (TIPO, QUANTIDADE, DATA, PRODUTO_ID) "
                     + "VALUES "
                     + "('" + movimentacao.tipo + "', " + movimentacao.quantidade + ", '" + movimentacao.data + "', " + idProduto + ")";
 
     conexao.query(sqlInsert, (erro, resultado) => {
         if (erro) {
-            json.status(400).json({ erro });
+            res.status(400).json({ erro });
         } else {
-            json.status(201).json({ movimentacao });
+            res.status(201).json({ movimentacao });
         }
     });
 });
