@@ -1,7 +1,8 @@
-const server = require ("../server.js");
-const conexao = require ("../../db/conexao/conexao.js");
+const express = require('express');
+const router = express.Router();
+const conexao = require("../../db/conexao/conexao.js");
 
-server.post("/mercados/:id_mercado/produtos", (req, res) => {
+router.post("/mercados/:id_mercado/produtos", (req, res) => {
     const idMercado = req.params.id_mercado;
     const jsonProduto = req.body;
 
@@ -27,7 +28,7 @@ server.post("/mercados/:id_mercado/produtos", (req, res) => {
     });
 });
 
-server.get("/mercados/:id_mercado/produtos", (req, res) => {
+router.get("/mercados/:id_mercado/produtos", (req, res) => {
     const idMercado = req.params.id_mercado;
 
     const sqlSelect = "SELECT ID, NOME "
@@ -53,7 +54,7 @@ server.get("/mercados/:id_mercado/produtos", (req, res) => {
     });
 });
 
-server.get("/mercados/:id_mercado/produtos/:id_produto", (req, res) => {
+router.get("/mercados/:id_mercado/produtos/:id_produto", (req, res) => {
     const idProduto = req.params.id_produto;
 
     const sqlSelect = "SELECT NOME, DESCRICAO, PRECO, QUANTIDADE "
@@ -69,7 +70,7 @@ server.get("/mercados/:id_mercado/produtos/:id_produto", (req, res) => {
     });
 });
 
-server.put("/mercados/:id_mercado/produtos/:id_produto", (req, res) => {
+router.put("/mercados/:id_mercado/produtos/:id_produto", (req, res) => {
     const idProduto = req.params.id_produto;
 
     const jsonProduto = req.body;
@@ -97,7 +98,7 @@ server.put("/mercados/:id_mercado/produtos/:id_produto", (req, res) => {
     });
 });
 
-server.delete("/mercados/:id_mercado/produtos/:id_produto", (req, res) => {
+router.delete("/mercados/:id_mercado/produtos/:id_produto", (req, res) => {
     const idProduto = req.params.id_produto;
 
     const sqlDelete = "DELETE FROM PRODUTO "
@@ -111,3 +112,5 @@ server.delete("/mercados/:id_mercado/produtos/:id_produto", (req, res) => {
         }
     });
 });
+
+module.exports = router;
