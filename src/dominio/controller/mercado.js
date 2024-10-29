@@ -3,7 +3,7 @@ const router = express.Router();
 const conexao = require("../../db/conexao/conexao.js");
 
 router.get('/mercados', (req, res) => {
-    const consultaSql = 'SELECT ID, NOME FROM loja';
+    const consultaSql = `SELECT ID, NOME FROM loja`;
     conexao.query(consultaSql, (erro, resultado) => {
         if(erro){
             console.log(erro);
