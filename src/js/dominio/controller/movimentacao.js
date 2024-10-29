@@ -1,4 +1,4 @@
-const conexao = require("../../db/conexao/conexao.js");
+const conexao = require("../../../resources/conexao");
 const express = require('express');
 const router = express.Router();
 

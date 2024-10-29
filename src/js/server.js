@@ -4,8 +4,8 @@ const router = require ('./routes.js');
 const express = require('express');
 const cors = require('cors');
 const server = express();
-const migration = require('../db/migration/V1__CREATE_TABLES');
-const conexao = require('../db/conexao/conexao.js');
+const migration = require('../resources/migration/V1__CREATE_TABLES.js');
+const conexao = require('../resources/conexao.js');
 
 server.use(express.json());
 server.use(cors());

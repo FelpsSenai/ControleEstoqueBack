@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const conexao = require("../../db/conexao/conexao.js");
+const conexao = require("../../../resources/conexao");
 
 router.get('/mercados', (req, res) => {
     const consultaSql = `SELECT ID, NOME FROM loja`;
@@ -44,8 +44,8 @@ router.post('/mercados', (req, res) => {
     });
 });
 
-router.put('/mercados/:idMercado', (req, res) => {
-    const idMercado = req.params.idMercado;
+router.put('/mercados/:id', (req, res) => {
+    const idMercado = req.params.id;
     const nomeMercado = req.body.nome;
     const enderecoMercado = req.body.endereco;
 
@@ -65,8 +65,8 @@ router.put('/mercados/:idMercado', (req, res) => {
     });
 });
 
-router.delete('/mercados/:idMercado', (req, res) => {
-    const idMercado = req.params.idMercado;
+router.delete('/mercados/:id', (req, res) => {
+    const idMercado = req.params.id;
 
     let deleteSql = `DELETE FROM loja WHERE ID = ${idMercado}`;
 

@@ -1,4 +1,4 @@
-const conexao = require("../conexao/conexao.js");
+const conexao = require("../conexao");
 
 function executeMigration(callback) {
     const criarTabelaLoja = `

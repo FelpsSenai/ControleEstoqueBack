@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const conexao = require("../../db/conexao/conexao.js");
+const conexao = require("../../../resources/conexao");
 
 router.post("/mercados/:id_mercado/produtos", (req, res) => {
     const idMercado = req.params.id_mercado;
