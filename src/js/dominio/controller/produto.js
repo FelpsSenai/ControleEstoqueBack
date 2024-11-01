@@ -65,7 +65,7 @@ router.get("/mercados/:id_mercado/produtos/:id_produto", (req, res) => {
         if (erro) {
             res.status(500).json({ mensagem: "Erro ao listar os produtos" });
         } else {
-            res.json({ resultado });
+            res.json( resultado );
         }
     });
 });

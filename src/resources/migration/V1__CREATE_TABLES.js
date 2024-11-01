@@ -34,7 +34,7 @@ function executeMigration(callback) {
                     ID INT PRIMARY KEY AUTO_INCREMENT,
                     TIPO ENUM('ENTRADA', 'SAIDA'),
                     QUANTIDADE INT,
-                    DATA DATE,
+                    DATA VARCHAR(20),
                     PRODUTO_ID INT,
                     FOREIGN KEY (PRODUTO_ID) REFERENCES PRODUTO(ID)
                 )`;
