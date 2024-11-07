@@ -44,6 +44,21 @@ function executeMigration(callback) {
                     return callback(erro);
                 }
                 callback(null);
+
+                const criarTabelaUsuario = `
+                    CREATE TABLE IF NOT EXISTS USUARIO (
+                        ID INT PRIMARY KEY AUTO_INCREMENT,
+                        NOME VARCHAR(50),
+                        EMAIL VARCHAR(100),
+                        SENHA VARCHAR(150)
+                    )`;
+
+                conexao.query(criarTabelaUsuario, (erro, resultado) => {
+                    if (erro) {
+                    return callback(erro);
+                }
+                    callback(null);
+                });
             });
         });
     });
