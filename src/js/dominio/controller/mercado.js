@@ -10,7 +10,7 @@ router.get('/mercados', (req, res) => {
             throw erro;
         }
         res.json(resultado)
-    })
+    });
 });
 
 router.get('/mercados/:id', (req, res) => {
@@ -22,7 +22,7 @@ router.get('/mercados/:id', (req, res) => {
             throw erro;
         }
         res.json(resultado)
-    })
+    });
 });
 
 router.post('/mercados', (req, res) => {
