@@ -1,12 +1,13 @@
 const express = require ('express');
 const router = express.Router();
 const conexao = require('../../../resources/conexao');
+const passwordCrypto = require('../../../resources/PasswordCrypto.js')
 
-router.post('/usuarios', (req, res) => {
+router.post('/usuarios', async (req, res) => {
     const usuario = req.body;
     const nomeUsuario = usuario.nome;
     const emailUsuario = usuario.email;
-    const senhaUsuario = usuario.senha;
+    const senhaUsuario = await passwordCrypto.hashPassword(usuario.senha)
 
     const insertSql = `INSERT INTO USUARIO (NOME, EMAIL, SENHA) VALUES (
         '${nomeUsuario}',
