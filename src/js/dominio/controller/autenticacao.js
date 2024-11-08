@@ -42,4 +42,12 @@ router.post('/login', (req, res) => {
     });
 });
 
+router.post('logout', (req, res) => {
+    const token = req.headers.token;
+
+    // invalidar(token);
+
+    res.json({});
+});
+
 module.exports = router;
